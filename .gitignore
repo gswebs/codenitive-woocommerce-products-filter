@@ -47,3 +47,39 @@ wp-config.php
 # uncomment the next line
 #/wp-content/themes
 .DS_Store
+
+# Composer / PHP
+vendor/
+composer.lock
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE / Editor files
+*.idea/
+*.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# PHPStorm / JetBrains
+/.idea/
+/*.iml
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Mac / Linux system files
+*.bak
+*.orig
+
+# Git itself
+.gitignore
+.gitattributes
