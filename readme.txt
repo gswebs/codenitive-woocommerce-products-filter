@@ -29,12 +29,16 @@ The plugin provides both a **Widget** and a **Shortcode**, giving you full flexi
 1. Upload the plugin folder to the `/wp-content/plugins/` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress.
 3. Use the 'Woo Attribute Filter by Codenitive' widget in **Appearance > Widgets**.
-4. Alternatively, use the shortcode `[codenitive_wc_attribute_filter]` in your posts or pages.
+4. Alternatively, use the shortcode `[codenitive_wc_attribute_filter attributes="moods" display="anchor_list"]` in your posts or pages.
 
 == Shortcode Usage ==
 
 Use the following shortcode to display the filter:
-`[codenitive_wc_attribute_filter attributes="color,size" display="checkbox"]`
+`[codenitive_wc_attribute_filter attributes="color,size" display="checkbox"]
+ [codenitive_wc_attribute_filter attributes="moods,weight" display="dropdown"]
+ [codenitive_wc_attribute_filter attributes="moods" display="anchor_list"]
+`
+
 
 **Parameters:**
 * `attributes`: Comma-separated list of attribute slugs (e.g., color, size). Leave empty to show all.
