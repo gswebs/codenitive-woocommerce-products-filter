@@ -1,0 +1,45 @@
+:root{
+    --codenit-filter-color-1: #eeeeee;
+    --codenit-filter-color-2: #3B503E;
+}
+.codenit-filter {
+    display: block !important;
+    width: 100%;
+    padding: 10px 0;
+    margin: 10px 0;
+}
+.codenit-filter-ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+.codenit-filter-ul a {
+    background: var(--codenit-filter-color-2);
+    color: var(--codenit-filter-color-1);
+    padding: 7px 10px;
+    border-radius: 32px;
+}
+.codenit-filter-ul a:hover, .codenit-filter-li.is-active a{
+    background: var(--codenit-filter-color-1);
+    color: var(--codenit-filter-color-2);
+}
+.codenit-filter-li.is-active a::before {
+    color: var(--codenit-filter-color-1);
+    content: "x";
+    display: inline-block;
+    margin-right: 5px;
+    opacity: 1;
+    position: relative;
+    top: -2px;
+    background-color: var(--codenit-filter-color-2);
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 99px;
+    height: 18px;
+    line-height: 14px;
+    text-align: center;
+    width: 18px;
+}

@@ -54,6 +54,7 @@ class CodeNit_WC_APF_Widget extends WP_Widget {
             <select name="<?php echo esc_attr( $this->get_field_name( 'display' ) ); ?>">
                 <option value="dropdown" <?php selected( $display, 'dropdown' ); ?>><?php esc_html_e( 'Dropdown', 'codenit-wc-attribute-filter' ); ?></option>
                 <option value="checkbox" <?php selected( $display, 'checkbox' ); ?>><?php esc_html_e( 'Checkboxes', 'codenit-wc-attribute-filter' ); ?></option>
+                <option value="anchor_list" <?php selected( $display, 'anchor_list' ); ?>><?php esc_html_e( 'List', 'codenit-wc-attribute-filter' ); ?></option>
             </select>
         </p>
         <?php

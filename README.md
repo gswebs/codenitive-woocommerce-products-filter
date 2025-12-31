@@ -1,2 +1,0 @@
-# codenitive-woocommerce-products-filter
-
