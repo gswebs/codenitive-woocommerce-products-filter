@@ -31,15 +31,17 @@ The plugin provides both a **Widget** and a **Shortcode**, giving you full flexi
 3. Use the 'Woo Attribute Filter by Codenitive' widget in **Appearance > Widgets**.
 4. Alternatively, use the shortcode `[codenitive_wc_attribute_filter]` in your posts or pages.
 
-== Shortcode Usage ==
-
-Use the following shortcode to display the filter:
-`[codenitive_wc_attribute_filter attributes="color,size" display="checkbox"]`
-
 **Parameters:**
 * `attributes`: Comma-separated list of attribute slugs (e.g., color, size). Leave empty to show all.
 * `display`: Choose between `dropdown` (default) or `checkbox`.
 * `button_text`: Change the text of the filter button.
+
+== Shortcode Usage ==
+
+Use the following shortcode to display the filter:
+`[codenitive_wc_attribute_filter attributes="color,size" display="checkbox"]`
+`[codenitive_wc_attribute_filter attributes="color,size" display="dropdown"]`
+`[codenitive_wc_attribute_filter attributes="color,size" display="anchor_list"]`
 
 == Screenshots ==
 
@@ -48,7 +50,7 @@ Use the following shortcode to display the filter:
 
 == Changelog ==
 
-= 1.0.1 =
+= 1.0.2 =
 * Fixed the dropdown filter issue
 
 = 1.0.0 =

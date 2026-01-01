@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: WooCommerce Product Filter by Codenitive
- * Plugin URI: https://codenitive.com
+ * Plugin URI: https://github.com/gswebs/codenitive-woocommerce-products-filter
  * Description: Filter WooCommerce products by attributes on shop and archive pages.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Codenitive
  * Author URI: https://codenitive.com
  * Text Domain: codenit-attribute-filter
@@ -33,11 +33,11 @@ add_action( 'plugins_loaded', function () {
             true
         );
         wp_enqueue_style(
-        'codenit-wc-apf-style',
-        CODENIT_WC_APF_URL . 'assets/css/style.css',
-        [],
-        '1.0.7'
-    );
+            'codenit-wc-apf-style',
+            CODENIT_WC_APF_URL . 'assets/css/style.css',
+            [],
+            '1.0.7'
+        );
     });
 
 

@@ -296,4 +296,5 @@ function codenit_wc_apf_build_tax_query_from_request() {
     }
 
     return $tax_query;
-}
+
+} 
