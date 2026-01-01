@@ -20,6 +20,21 @@ function codenit_wc_apf_get_selected_terms( $attribute_slug ) {
     );
 }
 
+function codenit_wc_apf_preserve_query_args( $exclude = [] ) {
+    foreach ( $_GET as $key => $value ) {
+        if ( in_array( $key, $exclude, true ) ) {
+            continue;
+        }
+
+        printf(
+            '<input type="hidden" name="%s" value="%s">',
+            esc_attr( $key ),
+            esc_attr( sanitize_text_field( wp_unslash( $value ) ) )
+        );
+    }
+}
+
+
 /**
  * Get filterable WooCommerce attributes
  * Optional: pass an array of attribute slugs to limit which attributes to show
@@ -90,7 +105,6 @@ function codenit_wc_apf_build_anchor_url( $attribute_slug, $term_slug ) {
         $base_url
     );
 }
-
 
 /**
  * Render attribute filter form
@@ -207,43 +221,35 @@ function codenit_wc_apf_render_filters( $args = [] ) {
                 echo '</ul>
                 <input type="hidden" name="'.esc_attr( $attribute->attribute_name ).'" value="">
                 </div>';
-            } else if ($args['display'] == 'anchor_list') {
-                echo '<div class="codenit-filter codenit-filter-'.$attribute->attribute_name.'"><p><strong>' . esc_html( $attribute->attribute_label ) . '</strong></p><ul>';
-                foreach ( $terms as $term ) {
-                    $checked = in_array( $term->slug, $selected, true );
-                
-                    printf(
-                        '<li><label>
-                            <a href=""
-                               data-attribute="%1$s"
-                               data-value="%2$s"
-                               %3$s>
-                            %4$s</a>
-                        </label></li>',
-                        esc_attr( $attribute->attribute_name ),
-                        esc_attr( $term->slug ),
-                        checked( $checked, true, false ),
-                        esc_html( $term->name )
-                    );
-                }
-                echo '</ul>
-                </div>';   
-            }
-            else { // default dropdown
+            } else { // default dropdown
+
+                // Dropdown is single-select → normalize
+                $selected_value = $selected[0] ?? '';
+            
+                echo '<div class="codenit-filter codenit-filter-' . esc_attr( $attribute->attribute_name ) . '">';
+                echo '<p><strong>' . esc_html( $attribute->attribute_label ) . '</strong></p>';
+            
                 echo '<select name="' . esc_attr( $attribute->attribute_name ) . '">';
-                echo '<option value="">' . esc_html( $attribute->attribute_label ) . '</option>';
-    
+            
+                echo '<option value="">' . esc_html__( 'Any', 'codenit-wc-attribute-filter' ) . '</option>';
+            
                 foreach ( $terms as $term ) {
                     printf(
-                        '<option value="%s" %s>%s</option>',
+                        '<option value="%1$s" %2$s>%3$s</option>',
                         esc_attr( $term->slug ),
-                        selected( in_array( $term->slug, $selected, true ), true, false ),
+                        selected( $selected_value, $term->slug, false ),
                         esc_html( $term->name )
                     );
                 }
-    
+            
                 echo '</select>';
+            
+                // Preserve other active filters
+                codenit_wc_apf_preserve_query_args( [ $attribute->attribute_name ] );
+            
+                echo '</div>';
             }
+
         }
     
         if ( $args['button'] ) {

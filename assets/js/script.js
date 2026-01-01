@@ -3,6 +3,13 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.codenit-wc-apf-widget-form').forEach(form => {
 
         form.addEventListener('submit', function (e) {
+
+            // If dropdown exists, allow normal form submit
+            if (form.querySelector('select')) {
+                return;
+            }
+
+            // checkbox-only handling
             e.preventDefault();
 
             const params = new URLSearchParams();
@@ -20,13 +27,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
 
-            // O filters selected → clean URL
+            // No filters → clean URL
             if ([...params].length === 0) {
                 window.location.href = window.location.pathname;
                 return;
             }
 
-            // Filters selected
+            // Apply filters
             window.location.href =
                 window.location.pathname + '?' + params.toString();
         });
