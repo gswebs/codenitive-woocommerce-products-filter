@@ -1,12 +1,16 @@
 :root{
     --codenit-filter-color-1: #eeeeee;
     --codenit-filter-color-2: #3B503E;
+    
+    --size: 8px;
+    --thickness: 2px;
+    --color: #000;
+    --active-color:#000;
 }
 .codenit-filter {
     display: block !important;
     width: 100%;
-    padding: 10px 0;
-    margin: 10px 0;
+    margin-bottom: 10px;
 }
 .codenit-filter-ul {
     list-style: none;
@@ -16,6 +20,13 @@
     flex-wrap: wrap;
     gap: 20px;
     margin-bottom: 30px;
+}
+.codenit-filter .label {
+    position: relative;
+}
+.codenit-filter label {
+    font-size: 16px;
+    font-weight: 500;
 }
 .codenit-filter-ul a {
     background: var(--codenit-filter-color-2);
@@ -38,8 +49,202 @@
     background-color: var(--codenit-filter-color-2);
     border: 1px solid rgba(0,0,0,.1);
     border-radius: 99px;
-    height: 18px;
-    line-height: 14px;
+    height: 16px;
+    line-height: 20px;
     text-align: center;
-    width: 18px;
+    width: 16px;
+}
+
+.codenit-arrow {
+    width: var(--size);
+    height: var(--size);
+    border: none;
+    background: transparent;
+    position: absolute;
+    right: 5px;
+    top: 60%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.codenit-arrow:before, .codenit-arrow:after{
+    content: '';
+    width: var(--thickness);
+    height: var(--size);
+    background:  #000;
+    display: block;
+    border-radius: 10px;
+    position: absolute;
+    top:0;
+    transform-origin: center;
+    transition: all 0.5s ease;
+}
+.codenit-arrow:before { 
+    transform: translateY(-50%) rotate(132deg);
+    left: 1px;
+}
+.codenit-arrow:after {
+    transform: translateY(-50%) rotate(-132deg);
+    right: 0.1px;
+}
+.codenit-accordion-active .codenit-arrow::before{
+    transform: translateY(-50%) rotate(50deg);
+}
+.codenit-accordion-active .codenit-arrow::after{
+    transform: translateY(-50%) rotate(-50deg);
+}
+
+.codenit-filter {
+    margin-bottom: 10px;
+    color: #000;
+    transition: all 0.5s ease-in-out;
+    border-bottom: 1px solid #c2c2c2 !important;
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+.codenit-filter button {
+    margin-top: 20px !important;
+}
+.codenit-accordion-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.codenit-accordion-content {
+    max-height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.5s ease, padding-block 0.5s ease;
+}
+.codenit-accordion-active .codenit-accordion-content {
+    opacity: 1;
+}
+
+.codenit-accordion-content li{
+    margin-bottom: 2px;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-color: #000 !important;
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    background: rgba(255, 255, 255, 0);
+    box-sizing: border-box;
+    margin-right: 4px;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #000;
+}
+
+input[type="checkbox"]:hover {
+    background-color: rgba(0, 0, 0, 1) !important;
+}
+
+input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 8px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    top: 2px;
+    left: 4.5px;
+}
+
+/*.codenit-filter.codenit-accordion-active {*/
+/*    border-color: #ced6ff;*/
+/*    border-radius: 10px;*/
+/*    background: hsl(214.29deg 43.75% 93.73%);*/
+/*}*/
+
+.codenit-price-slider {
+    margin-bottom: 30px;
+}
+/* Container for the slider */
+.range-slider-container {
+    position: relative;
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+/* The actual grey track bar */
+.range-slider-container::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 8px; /* Thickness of the grey bar */
+    background: #e6e6e6; /* Light grey track from your image */
+    border-radius: 4px;
+    left: 0;
+}
+
+/* Resetting the default range inputs */
+.codenit-range {
+    position: absolute;
+    width: 100%;
+    pointer-events: none;
+    appearance: none;
+    -webkit-appearance: none;
+    background: none;
+    outline: none;
+    margin: 0;
+}
+
+/* Styling the Red Handles (Chrome, Safari, Edge, Opera) */
+.codenit-range::-webkit-slider-thumb {
+    pointer-events: auto;
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px; /* Size of the red circle */
+    height: 22px;
+    background: #d80000; /* Red color from your image */
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2); /* Slight depth */
+    position: relative;
+    z-index: 3;
+}
+
+/* Styling the Red Handles (Firefox) */
+.codenit-range::-moz-range-thumb {
+    pointer-events: auto;
+    width: 22px;
+    height: 22px;
+    background: #d80000;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Clean up input text display */
+.codenit-price-inputs {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+    font-family: sans-serif;
+}
+
+.products.loading {
+    opacity: 0.5;
+    pointer-events: none;
+    transition: opacity 0.3s;
 }

@@ -4,7 +4,7 @@ Tags: woocommerce, filter, product filter, attribute filter, shop filter
 Requires at least: 5.8
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,6 +49,9 @@ Use the following shortcode to display the filter:
 2. Checkbox display vs Dropdown display.
 
 == Changelog ==
+
+= 1.0.3 =
+* Add price option in filter
 
 = 1.0.2 =
 * Fixed the dropdown filter issue

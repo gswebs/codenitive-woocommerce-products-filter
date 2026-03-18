@@ -67,30 +67,6 @@ add_action( 'plugins_loaded', function () {
     add_action( 'widgets_init', function () {
         register_widget( 'CodeNit_WC_APF_Widget' );
     });
-
-    /**
-     * Apply filters to product query
-     */
-    /*add_action( 'pre_get_posts', function( $query ) {
-
-        if ( is_admin() || ! $query->is_main_query() ) {
-            return;
-        }
-    
-        if ( ! is_shop() && ! is_product_taxonomy() ) {
-            return;
-        }
-    
-        $tax_query = (array) $query->get( 'tax_query' );
-    
-        $attribute_query = codenit_wc_apf_build_tax_query_from_request();
-    
-        if ( ! empty( $attribute_query ) ) {
-            $tax_query = array_merge( $tax_query, $attribute_query );
-            $query->set( 'tax_query', $tax_query );
-        }
-    
-    });*/
     
     add_action( 'pre_get_posts', function( $query ) {
 
