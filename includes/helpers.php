@@ -1,6 +1,49 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
+function codenit_wc_apf_render_price_slider() {
+    global $wpdb;
+
+    // 1. Get the actual min/max prices from your database
+    $prices = $wpdb->get_row( "
+        SELECT MIN(meta_value+0) as min_price, MAX(meta_value+0) as max_price 
+        FROM {$wpdb->postmeta} 
+        WHERE meta_key = '_price'
+    " );
+
+    $min = floor( $prices->min_price );
+    $max = ceil( $prices->max_price );
+
+    // 2. Get current values from URL (or use defaults)
+    $current_min = isset( $_GET['min_price'] ) ? sanitize_text_field( $_GET['min_price'] ) : $min;
+    $current_max = isset( $_GET['max_price'] ) ? sanitize_text_field( $_GET['max_price'] ) : $max;
+
+    ?>
+    <div class="codenit-price-slider">
+        <div class="codenit-accordion-header label">
+            <strong><?php esc_html_e( 'Price Range', 'codenit-wc-attribute-filter' ); ?></strong>
+        </div>
+        
+        <div class="codenit-price-inputs">
+            <span class="price-from"><?php echo get_woocommerce_currency_symbol(); ?><span id="min-price-text"><?php echo $current_min; ?></span></span>
+            <span class="price-to"><?php echo get_woocommerce_currency_symbol(); ?><span id="max-price-text"><?php echo $current_max; ?></span></span>
+        </div>
+
+        <div class="range-slider-container">
+            <input type="range" name="min_price" 
+                min="<?php echo $min; ?>" max="<?php echo $max; ?>" 
+                value="<?php echo $current_min; ?>" class="codenit-range" id="min_range">
+            
+            <input type="range" name="max_price" 
+                min="<?php echo $min; ?>" max="<?php echo $max; ?>" 
+                value="<?php echo $current_max; ?>" class="codenit-range" id="max_range">
+        </div>
+    </div>
+
+    <?php
+}
+
+
 /**
  * Get selected terms from URL (comma-separated)
  *
@@ -180,7 +223,7 @@ function codenit_wc_apf_render_filters( $args = [] ) {
             </div>';   
         }
     } else {
-        echo '<form method="GET" class="' . esc_attr( $args['form_class'] ) . '">';
+        echo '<form method="GET" class="' . esc_attr( $args['form_class'] ) . '"><div class="product-filter-inner">';
     
         foreach ( $attributes as $attribute ) {
     
@@ -200,16 +243,16 @@ function codenit_wc_apf_render_filters( $args = [] ) {
             }
     
             if ( $args['display'] === 'checkbox' ) {
-                echo '<div class="codenit-filter codenit-filter-'.$attribute->attribute_name.'"><p><strong>' . esc_html( $attribute->attribute_label ) . '</strong></p><ul>';
+                echo '<div class="codenit-filter codenit-accordion-active codenit-filter-'.$attribute->attribute_name.'"><div class="codenit-accordion-header label"><strong>' . esc_html( $attribute->attribute_label ) . '</strong><div class="codenit-arrow"></div></div><ul class="codenit-accordion-content">';
                 foreach ( $terms as $term ) {
                     $checked = in_array( $term->slug, $selected, true );
                 
                     printf(
                         '<li><label>
                             <input type="checkbox"
-                               data-attribute="%1$s"
-                               value="%2$s"
-                               %3$s>
+                            data-attribute="%1$s"
+                            value="%2$s"
+                            %3$s>
                             %4$s
                         </label></li>',
                         esc_attr( $attribute->attribute_name ),
@@ -226,8 +269,8 @@ function codenit_wc_apf_render_filters( $args = [] ) {
                 // Dropdown is single-select → normalize
                 $selected_value = $selected[0] ?? '';
             
-                echo '<div class="codenit-filter codenit-filter-' . esc_attr( $attribute->attribute_name ) . '">';
-                echo '<p><strong>' . esc_html( $attribute->attribute_label ) . '</strong></p>';
+                echo '<div class="codenit-filter codenit-accordion-active codenit-filter-' . esc_attr( $attribute->attribute_name ) . '">';
+                echo '<div class="codenit-accordion-header label"><strong>' . esc_html( $attribute->attribute_label ) . '</strong><div class="codenit-arrow"></div></div><div class="codenit-accordion-content">';
             
                 echo '<select name="' . esc_attr( $attribute->attribute_name ) . '">';
             
@@ -247,16 +290,20 @@ function codenit_wc_apf_render_filters( $args = [] ) {
                 // Preserve other active filters
                 codenit_wc_apf_preserve_query_args( [ $attribute->attribute_name ] );
             
-                echo '</div>';
+                echo '</div></div>';
             }
 
         }
-    
+        
+        if ( $args['show_price'] ) {
+            codenit_wc_apf_render_price_slider();
+        }
+            
         if ( $args['button'] ) {
             echo '<button type="submit">' . esc_html( $args['button_text'] ) . '</button>';
         }
     
-        echo '</form>';
+        echo '</div></form>';
     }
 }
 

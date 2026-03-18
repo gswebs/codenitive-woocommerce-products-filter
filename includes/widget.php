@@ -24,11 +24,14 @@ class CodeNit_WC_APF_Widget extends WP_Widget {
 
         // Display type: dropdown or checkbox
         $display_type = ! empty( $instance['display'] ) ? $instance['display'] : 'dropdown';
+        
+        $show_price = isset( $instance['show_price'] ) ? (bool) $instance['show_price'] : false;
 
         codenit_wc_apf_render_filters( [
             'form_class' => 'codenit-wc-apf-widget-form',
             'attributes' => $selected_attributes,
             'display'    => $display_type,
+            'show_price' => $show_price
         ] );
 
         echo $args['after_widget'];
@@ -38,16 +41,25 @@ class CodeNit_WC_APF_Widget extends WP_Widget {
         $title = $instance['title'] ?? '';
         $attributes = $instance['attributes'] ?? '';
         $display = $instance['display'] ?? 'dropdown';
+        $show_price = isset( $instance['show_price'] ) ? (bool) $instance['show_price'] : false;
         ?>
         <p>
             <label><?php esc_html_e( 'Title:', 'codenit-wc-attribute-filter' ); ?></label>
             <input class="widefat" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>"
-                   value="<?php echo esc_attr( $title ); ?>">
+                value="<?php echo esc_attr( $title ); ?>">
         </p>
         <p>
             <label><?php esc_html_e( 'Attributes (comma-separated slugs):', 'codenit-wc-attribute-filter' ); ?></label>
             <input class="widefat" name="<?php echo esc_attr( $this->get_field_name( 'attributes' ) ); ?>"
-                   value="<?php echo esc_attr( $attributes ); ?>" placeholder="color,size">
+                value="<?php echo esc_attr( $attributes ); ?>" placeholder="color,size">
+        </p>
+        <p>
+            <input type="checkbox" id="<?php echo esc_attr( $this->get_field_id( 'show_price' ) ); ?>" 
+                name="<?php echo esc_attr( $this->get_field_name( 'show_price' ) ); ?>" 
+                value="1" <?php checked( $show_price, true ); ?> />
+            <label for="<?php echo esc_attr( $this->get_field_id( 'show_price' ) ); ?>">
+                <?php esc_html_e( 'Show Price Range Slider', 'codenit-wc-attribute-filter' ); ?>
+            </label>
         </p>
         <p>
             <label><?php esc_html_e( 'Display Type:', 'codenit-wc-attribute-filter' ); ?></label>
