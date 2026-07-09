@@ -127,7 +127,7 @@
     margin-bottom: 2px;
 }
 
-input[type="checkbox"] {
+.codenit-filter input[type="checkbox"] {
     appearance: none;
     -webkit-appearance: none;
     width: 16px;
@@ -145,15 +145,15 @@ input[type="checkbox"] {
     margin-right: 4px;
 }
 
-input[type="checkbox"]:checked {
+.codenit-filter input[type="checkbox"]:checked {
     background-color: #000;
 }
 
-input[type="checkbox"]:hover {
+.codenit-filter input[type="checkbox"]:hover {
     background-color: rgba(0, 0, 0, 1) !important;
 }
 
-input[type="checkbox"]:checked::after {
+.codenit-filter input[type="checkbox"]:checked::after {
     content: "";
     position: absolute;
     width: 5px;
