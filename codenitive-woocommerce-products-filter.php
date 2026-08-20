@@ -61,6 +61,8 @@ add_action( 'plugins_loaded', function () {
     require_once CODENIT_WC_APF_PATH . 'includes/shortcode.php';
     require_once CODENIT_WC_APF_PATH . 'includes/widget.php';
 
+    require_once CODENIT_WC_APF_PATH . 'includes/wc-layered-nav-checkboxes.php';
+
     /**
      * Register widget
      */
