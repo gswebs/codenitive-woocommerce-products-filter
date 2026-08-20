@@ -81,5 +81,6 @@ Thumbs.db
 *.orig
 
 # Git itself
+.git
 .gitignore
 .gitattributes
