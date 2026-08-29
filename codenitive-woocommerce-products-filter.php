@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Product Filter by Codenitive
  * Plugin URI: https://github.com/gswebs/codenitive-woocommerce-products-filter
  * Description: Filter WooCommerce products by attributes, categories, tags, and price on shop and archive pages.
- * Version: 1.0.6
+ * Version: 1.0.7
  * Author: Codenitive
  * Author URI: https://codenitive.com
  * Text Domain: codenit-attribute-filter
@@ -61,7 +61,7 @@ add_action( 'plugins_loaded', function () {
     require_once CODENIT_WC_APF_PATH . 'includes/shortcode.php';
     require_once CODENIT_WC_APF_PATH . 'includes/widget.php';
 
-    require_once CODENIT_WC_APF_PATH . 'includes/wc-layered-nav-checkboxes.php';
+    require_once CODENIT_WC_APF_PATH . 'includes/layered-nav-checkboxes.php';
 
     /**
      * Register widget
