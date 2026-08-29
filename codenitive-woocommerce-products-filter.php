@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce Product Filter by Codenitive
  * Plugin URI: https://github.com/gswebs/codenitive-woocommerce-products-filter
  * Description: Filter WooCommerce products by attributes, categories, tags, and price on shop and archive pages.
- * Version: 1.0.5
+ * Version: 1.0.6
  * Author: Codenitive
  * Author URI: https://codenitive.com
  * Text Domain: codenit-attribute-filter
